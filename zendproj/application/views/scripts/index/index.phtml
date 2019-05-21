@@ -1,0 +1,49 @@
+<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Chicle" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Unlock" rel="stylesheet">
+<div id="grad">
+<?php
+$this->title = "My Albums";
+$this->headTitle($this->title);
+?>
+<div class="header">
+<p><a href="<?php echo $this->url(array('controller'=>'index',
+'action'=>'add'));?>">Add new album</a></p>
+</div>
+<?php
+    $con = Doctrine_Manager::getInstance()->connection();
+    $res = $con->execute("SELECT * FROM albums;", array(1));
+    $retorno = $res->fetchAll();
+?>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Novel</th>
+        <th>Author</th>
+        <th>Language</th>
+        <th>Places</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    <?php foreach($retorno as $album): ?>
+    <tr>
+        <td><?php echo $this->escape($album['title']);?></td>
+        <td><?php echo $this->escape($album['artist']);?></td>
+        <td><?php echo $this->escape($album['novel']);?></td>
+        <td><?php echo $this->escape($album['multiCheckbox']);?></td>
+        <td><?php echo $this->escape($album['selectlang']);?></td>
+        <td><?php echo $this->escape($album['multiselect']);?></td>
+        <?php echo ($album['image'])?'<td><img class = "preview-img" src="../public/upload/'.$album['image'].'"></img></td>':'<td>-</td>';?>
+        <td>
+        <a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'edit', 'id'=>$album['id']));?>">Edit</a>
+        <a href="<?php echo $this->url(array('controller'=>'index','action'=>'delete', 'id'=>$album['id']));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+<div class="logout">
+<a href="<?php echo $this->url(array('controller'=>'index','action'=>'logout'));?>">Logout</a>
+</div>
+</table>
+</div>

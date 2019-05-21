@@ -1,0 +1,24 @@
+<?php // exit('exists'); ?>
+<dt id="<?php echo $this->element->getName(); ?>-label">
+    <span>Uploaded: </span>
+</dt>
+
+<dd>
+    <?php echo $this->element->getDescription(); ?>
+</dd>
+
+<dt>    
+    <label for="<?php echo $this->element->getName(); ?>" 
+        class="<?php if ($this->element->isRequired()): ?> required <?php endif; ?> image">
+        <?php echo 'Upload:';?></label>
+    
+</dt>
+<!-- outputs form element markup -->
+<dd id="<?php echo $this->element->getName(); ?>-element">
+    <?php echo $this->content; ?>
+    <?php if ($this->element->hasErrors()): ?>
+        <ul class="error">
+            <?php echo $this->formErrors($this->element->getMessages()); ?>
+        </ul>
+    <?php endif; ?>
+</dd>

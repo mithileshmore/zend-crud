@@ -1,0 +1,19 @@
+
+<?php
+$this->title = "Delete album";
+$this->headTitle($this->title);
+?>
+
+<div class="del">
+<p>Are you sure that you want to delete
+'<?php echo $this->escape($this->album['title']); ?>' by '<?php echo $this->escape($this->album['artist']); ?>'?
+</p>
+
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+<div>
+	<input type="hidden" name="id" value="<?php echo $this->album['id']; ?>" />
+	<input type="submit" class="yes" name="del" value="Yes" />
+	<input type="submit" class="no" name="del" value="No" />
+</div>
+</form>
+</div>
